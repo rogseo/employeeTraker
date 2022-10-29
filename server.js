@@ -2,6 +2,7 @@ const mysql=require("mysql2");
 const express=require("express");
 const inquirer=require("inquirer");
 const promptQuestion=require("./index");
+const { response } = require("express");
 
 const PORT= process.env.PORT || 3001;
 const app=express();
@@ -51,17 +52,22 @@ const performAction = async (data,toDo) => {
         db.query(`SELECT *FROM role;`,(err,result)=>{
           console.table(result);
         });
-      case "View All Employees":
-        db.query(`SELECT *FROM role;`,(err,result)=>{
-          console.table(result);
-        });
+        break;
       case "View All Employees":
         db.query(`SELECT *FROM employees;`,(err,result)=>{
           console.table(result);
         });
-      case ""
-      // let employeeData = await prompt(employeeQuestions); // Grab the employee data by awaiting prompt
-      // console.log(employeeData); // Console out the data
+        break;
+      case "Add Department":
+        db.query(`INSERT INTO department(name) VALUES ${response.department_name};`,(err,result)=>{
+        console.log('successfully added');
+        });
+        break;
+
+      case "Add Role":
+        db.query(`INSERT INTO role(title,salary,manager_id) VALUES (${response.role_title},${response.role_salary,response.department_id};`,(err,result)=>{
+        console.log('successfully added');
+        });
         break;
       default:
           break;
@@ -76,17 +82,26 @@ const init = async () => {
   // While the user has not chosen to exit...
   while (toDo != "Quit") {
     console.log("while loop");
-    toDo = (await inquirer.prompt(promptQuestion(employees,toDo))).toDo; // Get their choice by awaiting a prompt
+    var response=await inquirer.prompt(
+        {
+          type: 'list',
+          message: `What would you like to do?`,
+          name: 'toDo',
+          choices:['View All Department','View All Role','View All Employees','View Total Utilized Budget By Department','Add Department','Remove Department','Add Role',`Add Employee`,`Update Employee Role`, `Quit`],
+        }
+    );
+    toDo=response.toDo;
     console.log(toDo);
+
+    response =await inquirer.prompt(promptQuestion(employees,toDo)); // Get their choice by awaiting a prompt
 
     await performAction(employees,toDo);
 
     await timer(3000);//delay next question so that you can see the result
       ///perforAction function async issue
-    console.log("-------------------------");
-    console.log("-------------------------");
-    console.log("-------------------------");
-    console.log("-------------------------");
+    console.log("                          ");
+    console.log("                          ");
+    console.log("                          ");
  
   }
   console.log("finish loop");
