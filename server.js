@@ -40,18 +40,29 @@ LEFT JOIN employee E2 ON E1.manager_id = E2.id;
 
 // This function handles the action chosen by the user in the main loop
 const performAction = async (data,toDo) => {
-  let queryResult;
   console.log("performAction");
   switch (toDo) {
       case "View All Department":
         db.query(`SELECT *FROM department;`,(err,result)=>{
-          queryResult= result;
+          console.table(result);
         });
         break;
-      // case "Add an Employee":
-      //     let employeeData = await prompt(employeeQuestions); // Grab the employee data by awaiting prompt
-      //     console.log(employeeData); // Console out the data
-      //     break;
+      case "View All Role":
+        db.query(`SELECT *FROM role;`,(err,result)=>{
+          console.table(result);
+        });
+      case "View All Employees":
+        db.query(`SELECT *FROM role;`,(err,result)=>{
+          console.table(result);
+        });
+      case "View All Employees":
+        db.query(`SELECT *FROM employees;`,(err,result)=>{
+          console.table(result);
+        });
+      case ""
+      // let employeeData = await prompt(employeeQuestions); // Grab the employee data by awaiting prompt
+      // console.log(employeeData); // Console out the data
+        break;
       default:
           break;
   }
@@ -60,16 +71,23 @@ const performAction = async (data,toDo) => {
 // Main logic flow
 const init = async () => {
   let toDo;
+  const timer = ms => new Promise(res => setTimeout(res, ms))  //timer to delay each question so that you can see result
 
   // While the user has not chosen to exit...
   while (toDo != "Quit") {
     console.log("while loop");
     toDo = (await inquirer.prompt(promptQuestion(employees,toDo))).toDo; // Get their choice by awaiting a prompt
     console.log(toDo);
-    console.log(await performAction(employees,toDo));
+
+    await performAction(employees,toDo);
+
+    await timer(3000);//delay next question so that you can see the result
       ///perforAction function async issue
+    console.log("-------------------------");
+    console.log("-------------------------");
+    console.log("-------------------------");
+    console.log("-------------------------");
  
-    
   }
   console.log("finish loop");
 }
