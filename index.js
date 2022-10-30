@@ -1,11 +1,6 @@
 const inquirer=require('inquirer');
-// const Intern=require("./lib/Intern");
-// const Manager=require("./lib/Manager");
-// const Engineer=require("./lib/Engineer");
 
-
-
-const promptQuestion = (employees, toDo)=>{
+const promptQuestion = (employees)=>{
     return [
       {
         type: 'list',
@@ -48,7 +43,6 @@ const promptQuestion = (employees, toDo)=>{
             return answers.toDo === 'Add Role'
         }
       },
-      //question for add employee
       {
         type: 'input',
         message: `What is your employee's first name`,
@@ -104,7 +98,6 @@ const promptQuestion = (employees, toDo)=>{
     ]
 
 }
-
 
 
 

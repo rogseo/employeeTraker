@@ -26,7 +26,6 @@ db.connect(()=>{
 const getUpdatedEmployee = async ()=>{
 
   const role=await query("SELECT id, title,department_id FROM role;");
-  console.log(role);
   const department=await query("SELECT *FROM department;");
   const employee=await query(`SELECT E1.id, E1.first_name, E1.last_name, role.title AS role, role.salary, department.name AS department, CONCAT(E2.first_name," ",E2.last_name) AS manager
   FROM (((employee E1 INNER JOIN role ON E1.role_id=role.id)
@@ -127,23 +126,20 @@ const performAction = async (info,response) => {
         promptEmployee();
         break;
       case "Quit":
-        console.log("finish");
+        console.log("Good Bye");
         process.exit(0);   
       default:
           break;
 
-      
   }
 }
 
 // Main logic flow
 const promptEmployee = async () => {
-  let toDo;
   //get updated information from DB
   var info=await getUpdatedEmployee();
   // Get their choice by awaiting a prompt
-  response =await inquirer.prompt(promptQuestion(info,toDo)); 
-  console.log(response);
+  response =await inquirer.prompt(promptQuestion(info)); 
   //Make query depending on user's choice
   await performAction(info,response);
 }
