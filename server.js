@@ -97,8 +97,12 @@ const performAction = async (info,response) => {
         promptEmployee();
         break;
       case 'View Total Utilized Budget By Department':
-        result=await query(`INSERT INTO role(title,salary,manager_id) VALUES ("${response.role_name}",${response.role_salary},"${response.role_department}");`);
-        console.log('successfully added');
+        result=await query(`SELECT department.name,SUM(role.salary) AS totalbudget
+        FROM ((((employee E1 INNER JOIN role ON E1.role_id=role.id)
+        INNER JOIN department ON department.id=role.department_id))
+        LEFT JOIN employee E2 ON E1.manager_id = E2.id)
+        GROUP BY department.id;`);
+        console.table(result);
         promptEmployee();
         break;
       case 'Remove Department':

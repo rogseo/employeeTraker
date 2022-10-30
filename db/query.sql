@@ -4,10 +4,13 @@
 -- INNER JOIN role ON employee.role_id=role.id)
 -- INNER JOIN department ON department.id=role.department_id);
 USE organization_db;
-SELECT E1.id, E1.first_name, E1.last_name, role.title, role.salary, department.name, CONCAT(E2.first_name," ",E2.last_name) AS manager
-FROM (((employee E1 INNER JOIN role ON E1.role_id=role.id)
+SELECT SUM(role.salary) AS total budget
+FROM ((((employee E1 INNER JOIN role ON E1.role_id=role.id)
 INNER JOIN department ON department.id=role.department_id))
-LEFT JOIN employee E2 ON E1.manager_id = E2.id;
+LEFT JOIN employee E2 ON E1.manager_id = E2.id)
+GROUP BY department.id;
+
+
 
 
 -- SELECT CONCAT(employee.first_name," ",employee.last_name) as manager
