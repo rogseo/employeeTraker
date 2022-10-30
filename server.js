@@ -103,7 +103,7 @@ const performAction = async (info,response) => {
         promptEmployee();
         break;
       case 'Remove Department':
-        result=await query(`INSERT INTO role(title,salary,manager_id) VALUES ("${response.role_name}",${response.role_salary},"${response.role_department}");`);
+        result=await query(`DELETE FROM department where name="${response.remove_department}";`);
         console.log('successfully added');
         promptEmployee();
         break;

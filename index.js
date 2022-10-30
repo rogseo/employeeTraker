@@ -91,6 +91,15 @@ const promptQuestion = (employees, toDo)=>{
         when(answers) {
             return answers.toDo === 'Add Employee'
         }
+      },
+      {
+        type: 'list',
+        message: `Select the department you want to delete`,
+        name: 'remove_department',
+        choices: employees.department.name_list,
+        when(answers) {
+            return answers.toDo === 'Remove Department'
+        }
       }
     ]
 
