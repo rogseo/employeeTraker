@@ -94,6 +94,24 @@ const promptQuestion = (employees)=>{
         when(answers) {
             return answers.toDo === 'Remove Department'
         }
+      },
+      {
+        type: 'list',
+        message: `Select the employee that you want to update`,
+        name: 'update_employee_name',
+        choices: employees.employee_list,
+        when(answers) {
+            return answers.toDo === 'Update Employee Role'
+        }
+      },
+      {
+        type: 'list',
+        message: `Select the role`,
+        name: 'update_employee_role',
+        choices: employees.role.name_list,
+        when(answers) {
+            return answers.toDo === 'Update Employee Role'
+        }
       }
     ]
 

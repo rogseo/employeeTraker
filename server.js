@@ -27,7 +27,7 @@ const getUpdatedEmployee = async ()=>{
 
   const role=await query("SELECT id, title,department_id FROM role;");
   const department=await query("SELECT *FROM department;");
-  const employee=await query(`SELECT E1.id, E1.first_name, E1.last_name, role.title AS role, role.salary, department.name AS department, CONCAT(E2.first_name," ",E2.last_name) AS manager
+  const employee=await query(`SELECT E1.id AS id, CONCAT(E1.first_name," ", E1.last_name) AS name, role.title AS role, role.salary, department.name AS department, CONCAT(E2.first_name," ",E2.last_name) AS manager
   FROM (((employee E1 INNER JOIN role ON E1.role_id=role.id)
   INNER JOIN department ON department.id=role.department_id))
   LEFT JOIN employee E2 ON E1.manager_id = E2.id;
@@ -35,7 +35,7 @@ const getUpdatedEmployee = async ()=>{
    
   var role_list=role.map(e=>e.title);
   var department_list=department.map(e=>e.name);
-  var employee_list=employee.map(e=>e.first_name+e.last_name);
+  var employee_list=employee.map(e=>e.name);
   var manager_list=employee.filter(e=>(e.manager===null)?false : true);
 
   var result={
@@ -125,7 +125,11 @@ const performAction = async (info,response) => {
         promptEmployee();
         break;
       case `Update Employee Role`:
-        result=await query(`INSERT INTO role(title,salary,manager_id) VALUES ("${response.role_name}",${response.role_salary},"${response.role_department}");`);
+        var id=await query(`SELECT id FROM employee where CONCAT(first_name," ",last_name)="${response.update_employee_name}";`)
+        console.log(id);
+        var role_id=info.role.info.filter(e=>e.role===response.employee_role).map(e=>e.id);
+        console.log(role_id[0]);
+        result=await query(`UPDATE employee SET role_id=${role_id[0]} where id=${id[0].id} ;`);
         console.log('successfully added');
         promptEmployee();
         break;

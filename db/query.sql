@@ -13,6 +13,7 @@ GROUP BY department.id;
 
 
 
+
 -- SELECT CONCAT(employee.first_name," ",employee.last_name) as manager
 -- FROM employee
 -- JOIN employee ON employee.id=employee.manager_id;
