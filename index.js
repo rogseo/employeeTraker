@@ -11,7 +11,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What would you like to do?`,
         name: 'toDo',
-        choices:['View All Department','View All Role','View All Employees','View Total Utilized Budget By Department','Add Department','Remove Department','Add Role',`Add Employee`,`Update Employee Role`, `Quit`],
+        choices:['View All Department','View All Role','View All Employees','View Total Utilized Budget By Department','Add Department','Remove Department','Add Role','Remove Role',`Add Employee`,'Remove Employee',`Update Employee Role`, `Quit`],
       },
       ///ADD department question
       {
@@ -43,7 +43,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What department does the role belong to?`,
         name: 'role_department',
-        choices: employees.department_list,
+        choices: employees.department.name_list,
         when(answers) {
             return answers.toDo === 'Add Role'
         }
@@ -68,8 +68,8 @@ const promptQuestion = (employees, toDo)=>{
       {
         type: 'list',
         message: `What is the department`,
-        name: 'role_department',
-        choices: employees.manager,
+        name: 'employee_department',
+        choices: employees.department_list,
         when(answers) {
             return answers.toDo === 'Add Employee'
         }
@@ -78,7 +78,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What is the employee's role`,
         name: 'employee_role',
-        choices: employees.role_list,
+        choices: employees.role.name_list,
         when(answers) {
             return answers.toDo==='Add Employee'
         }
@@ -87,33 +87,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What is the employee's manager`,
         name: 'employee_manager',
-        choices: employees.manager,
-        when(answers) {
-            return answers.toDo === 'Add Employee'
-        }
-      },
-      {
-        type: 'input',
-        message: `What is the name of role`,
-        name: 'role_title',
-        choices: employees.manager,
-        when(answers) {
-            return answers.toDo === 'Add Employee'
-        }
-      },
-      {
-        type: 'input',
-        message: `What is the salary of the role`,
-        name: 'role_salary',
-        when(answers) {
-            return answers.toDo === 'Add Employee'
-        }
-      },
-      {
-        type: 'list',
-        message: `What is the department`,
-        name: 'role_department',
-        choices: employees.manager,
+        choices: employees.manager.name_list,
         when(answers) {
             return answers.toDo === 'Add Employee'
         }

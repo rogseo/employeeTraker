@@ -28,6 +28,10 @@ SELECT *
 FROM employee E1
 RIGHT JOIN employee E2 ON E1.manager_id = E2.id;
 
+SELECT CONCAT(E2.first_name," ",E2.last_name) AS manager
+FROM employee E1
+LEFT JOIN employee E2 ON E1.manager_id = E2.id;
+
 
 
 SELECT *
@@ -37,3 +41,4 @@ JOIN department ON role.department_id=department.id;
 SELECT *
 FROM role
 INNER JOIN department ON role.department_id=department.id;
+
