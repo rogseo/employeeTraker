@@ -43,7 +43,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What department does the role belong to?`,
         name: 'role_department',
-        choice: employees.department_list,
+        choices: employees.department_list,
         when(answers) {
             return answers.toDo === 'Add Role'
         }
@@ -69,7 +69,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What is the department`,
         name: 'role_department',
-        choice : employees.manager,
+        choices: employees.manager,
         when(answers) {
             return answers.toDo === 'Add Employee'
         }
@@ -78,7 +78,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What is the employee's role`,
         name: 'employee_role',
-        choice: employees.role_list,
+        choices: employees.role_list,
         when(answers) {
             return answers.toDo==='Add Employee'
         }
@@ -87,7 +87,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What is the employee's manager`,
         name: 'employee_manager',
-        choice : employees.manager,
+        choices: employees.manager,
         when(answers) {
             return answers.toDo === 'Add Employee'
         }
@@ -96,7 +96,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'input',
         message: `What is the name of role`,
         name: 'role_title',
-        choice : employees.manager,
+        choices: employees.manager,
         when(answers) {
             return answers.toDo === 'Add Employee'
         }
@@ -113,7 +113,7 @@ const promptQuestion = (employees, toDo)=>{
         type: 'list',
         message: `What is the department`,
         name: 'role_department',
-        choice : employees.manager,
+        choices: employees.manager,
         when(answers) {
             return answers.toDo === 'Add Employee'
         }
