@@ -114,10 +114,8 @@ const performAction = async (info,response) => {
         break;
       case 'Add Employee':
         var role_id=info.role.info.filter(e=>e.title===response.employee_role).map(e=>e.id)
-        console.log(role_id);
-        var manager_id=info.manager.info.filter(e=>e.manager===response.employee_manager).map(e=>e.id);
-        console.log(manager_id[0]);
-        result=await query(`INSERT INTO employee(first_name,last_name,role_id,manager_id) VALUES ("${response.first_name}","${response.last_name}",${role_id[0]},${manager_id[0]});`);
+        var manager_id=await query(`SELECT id FROM employee WHERE first_name="${response.employee_manager.split(" ")[0]}";`);
+        result=await query(`INSERT INTO employee (first_name,last_name,role_id,manager_id) VALUES ("${response.first_name}","${response.last_name}",${role_id[0]},${manager_id[0].id});`);
         console.log('successfully added');
         promptEmployee();
         break;
@@ -129,13 +127,8 @@ const performAction = async (info,response) => {
         break;
       case `Update Employee Role`:
         var id=await query(`SELECT id FROM employee where first_name="${response.update_employee_name.split(" ")[0]}";`)
-        id=id[0].id;
-        console.log(id);
         var role_id=await query(`SELECT id FROM role where title="${response.update_employee_role}";`)
-        console.log(role_id);
-        role_id=role_id[0].id;
-        console.log(role_id);
-        result=await query(`UPDATE employee SET role_id=${role_id} where id=${id};`);
+        result=await query(`UPDATE employee SET role_id=${role_id[0].id} where id=${id[0].id};`);
 
         console.log('successfully added');
         promptEmployee();

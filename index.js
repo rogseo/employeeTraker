@@ -7,7 +7,19 @@ const promptQuestion = (employees)=>{
         type: 'list',
         message: `What would you like to do?`,
         name: 'toDo',
-        choices:['View All Department','View All Role','View All Employees','View Total Utilized Budget By Department','Add Department','Remove Department','Add Role','Remove Role',`Add Employee`,'Remove Employee',`Update Employee Role`, `Quit`],
+        choices:[
+        'View All Department',
+        'View All Role',
+        'View All Employees',
+        'View Total Utilized Budget By Department',
+        'Add Department',
+        'Remove Department',
+        'Add Role',
+        'Remove Role',
+        `Add Employee`,
+        'Remove Employee',
+        `Update Employee Role`, 
+        `Quit`],
       },
       ///ADD department question
       {
