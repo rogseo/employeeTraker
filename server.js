@@ -1,7 +1,7 @@
 const mysql=require("mysql2");
 const inquirer=require("inquirer");
 const promptQuestion=require("./index");
-const util = require('util');
+const util = require('util.promisify');
 //to show db table in console.
 const ctable=require('console.table');
 
@@ -17,7 +17,7 @@ const db = mysql.createConnection(
     console.log("connected to the organization_db database")
 );
 //to solve async issue
-const query = util.promisify(db.query).bind(db);
+const query = util(db.query).bind(db);
 //After db connected, do PromptEmployee().
 db.connect(()=>{
   promptEmployee();
