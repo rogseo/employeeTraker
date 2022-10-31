@@ -1,3 +1,4 @@
+USE organization_db;
 INSERT INTO department (name)
 VALUES ("Sales"),
        ("Engineering"),

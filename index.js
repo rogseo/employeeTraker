@@ -1,3 +1,4 @@
+const { response } = require('express');
 const inquirer=require('inquirer');
 
 const promptQuestion = (employees)=>{
@@ -61,15 +62,6 @@ const promptQuestion = (employees)=>{
       },
       {
         type: 'list',
-        message: `What is the department`,
-        name: 'employee_department',
-        choices: employees.department_list,
-        when(answers) {
-            return answers.toDo === 'Add Employee'
-        }
-      },
-      {
-        type: 'list',
         message: `What is the employee's role`,
         name: 'employee_role',
         choices: employees.role.name_list,
@@ -93,6 +85,24 @@ const promptQuestion = (employees)=>{
         choices: employees.department.name_list,
         when(answers) {
             return answers.toDo === 'Remove Department'
+        }
+      },
+      {
+        type: 'list',
+        message: `Select the role you want to delete`,
+        name: 'remove_role',
+        choices: employees.role.name_list,
+        when(answers) {
+            return answers.toDo === 'Remove Role'
+        }
+      },
+      {
+        type: 'list',
+        message: `Select the employee you want to delete`,
+        name: 'remove_employee',
+        choices: employees.employee_list,
+        when(answers) {
+            return answers.toDo === 'Remove Employee'
         }
       },
       {
