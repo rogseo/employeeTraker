@@ -88,7 +88,6 @@ const performAction = async (info,response) => {
         break;
       case "Add Role":
         var department_id=info.department.info.filter(e=>e.name==response.role_department).map(e=>e.id);
-        console.log(department_id);
         result=await query(`INSERT INTO role(title,salary,department_id) VALUES ("${response.role_name}",${response.role_salary},${department_id[0]});`);
         console.log('successfully added');
         promptEmployee();
@@ -121,7 +120,6 @@ const performAction = async (info,response) => {
         break;
       case 'Remove Employee':
         result=await query(`DELETE FROM employee WHERE first_name="${response.remove_employee.split(" ")[0]}";`);
-        console.log(result);
         console.log('successfully deleted');
         promptEmployee();
         break;

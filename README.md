@@ -5,9 +5,6 @@
 
 A command-line application to manage a company's employee database, using Node.js, Inquirer, and MySQL
 
-![mock-up gif](./images/TeamBadgeGenerator.gif)
-
-
 ## Table of Contents
 - [Technology](#technology)
 - [Installation](#installation)
@@ -73,7 +70,7 @@ THEN I am presented with a formatted table showing the combined salaries of all 
 
 
 ## Demonstration
-[ViewDemoVideo](https://watch.screencastify.com/v/5KPWM4vYaMBR2lqgYyp6)
+[ViewDemoVideo](https://watch.screencastify.com/v/rXGVlGsQZfoBYtM3qBbB)
 
 ## Questions
 if you have more question, reach me out below.
